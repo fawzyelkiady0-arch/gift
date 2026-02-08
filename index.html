@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>أهلاً رمضان 🌙</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
+  color:#fff;
+  overflow:hidden;
+}
+
+/* شاشة الباسورد */
+#lock{
+  position:fixed;
+  inset:0;
+  background:linear-gradient(135deg,#0f2027,#203a43);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.lock-box{
+  background:rgba(255,255,255,0.12);
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:360px;
+  backdrop-filter:blur(10px);
+}
+
+.lock-box h2{
+  color:#ffd369;
+  margin-bottom:10px;
+}
+
+.lock-box p{
+  margin-bottom:15px;
+}
+
+.lock-box input{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:12px;
+  text-align:center;
+}
+
+.lock-box button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:12px;
+  background:#ffd369;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* المطر */
+.fall{
+  position:fixed;
+  top:-40px;
+  font-size:26px;
+  animation: fall linear infinite;
+  opacity:0.85;
+  pointer-events:none;
+  z-index:1;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(120vh);
+  }
+}
+
+/* المحتوى */
+#content{
+  display:none;
+  padding:20px 15px 60px;
+  position:relative;
+  z-index:2;
+}
+
+.card{
+  background:rgba(255,255,255,0.1);
+  border-radius:20px;
+  padding:20px;
+  text-align:center;
+  margin-bottom:25px;
+}
+
+.card h3{
+  color:#ffd369;
+  margin-bottom:10px;
+}
+
+.card p{
+  line-height:1.7;
+}
+
+.card img{
+  width:100%;
+  border-radius:15px;
+  margin:15px 0;
+}
+</style>
+</head>
+
+<body>
+
+<!-- شاشة القفل -->
+<div id="lock">
+  <div class="lock-box">
+    <h2>🌙 أهلاً رمضان Om Celia 💌</h2>
+    <p>مفاجأة بسيطة من القلب 🤍</p>
+    <input id="pass" placeholder="اكتب الباسورد">
+    <button onclick="openGift()">افتح</button>
+  </div>
+</div>
+
+<!-- الصوت -->
+<audio id="song" src="ramadan.mp3" loop></audio>
+
+<!-- المحتوى -->
+<div id="content">
+
+  <div class="card">
+    <h3>رمضان كريم 🌙</h3>
+    <img src="ramadan.jpg">
+    <p>
+      كل سنة وإنتي طيبة يا أم سيليا 🤍  
+      رمضان شهر الخير والطمأنينة  
+      والقلوب اللي بترتاح من غير سبب.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>لمّة وراحة بال ✨</h3>
+    <img src="ramadan1.jpg">
+    <p>
+      في رمضان كل حاجة بتهدى  
+      والروح بتقرب  
+      والدعوة بتطلع من القلب للقلب.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>أيام كلها نور 💛</h3>
+    <img src="ramadan2.jpg">
+    <p>
+      ربنا يجعل أيامك كلها نور  
+      ويفتحلك أبواب الخير  
+      ورمضان عليك نعمة وفرحة.
+    </p>
+  </div>
+
+</div>
+
+<script>
+function openGift(){
+  var password = "رمضان احلا مع ام سيليا";
+  var input = document.getElementById("pass").value;
+
+  if(input === password){
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    document.body.style.overflowY = "auto";
+    document.getElementById("song").play();
+    rain();
+  }else{
+    alert("الباسورد غلط 😅");
+  }
+}
+
+function rain(){
+  var icons = ["❤️","🏮","🌙","✨"];
+  for(var i=0;i<30;i++){
+    var el = document.createElement("div");
+    el.className = "fall";
+    el.innerText = icons[Math.floor(Math.random()*icons.length)];
+    el.style.left = Math.random()*100 + "vw";
+    el.style.animationDuration = (4 + Math.random()*5) + "s";
+    document.body.appendChild(el);
+  }
+}
+</script>
+
+</body>
+</html>
