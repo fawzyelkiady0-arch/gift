@@ -3,90 +3,37 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🎁 مفاجأة رمضان</title>
+<title>أهلاً رمضان 🌙</title>
 
 <style>
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
-  font-family: 'Cairo', sans-serif;
+  box-sizing:border-box;
+  font-family: "Cairo", sans-serif;
 }
 
 body{
-  height:100vh;
-  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
+  min-height:100vh;
+  background: linear-gradient(180deg,#0f2027,#203a43,#2c5364);
+  overflow-x:hidden;
   color:#fff;
 }
 
-/* صندوق الدخول */
-.box{
-  background:rgba(255,255,255,0.08);
-  backdrop-filter: blur(15px);
-  padding:25px;
-  border-radius:20px;
-  width:90%;
-  max-width:350px;
-  text-align:center;
-  box-shadow:0 20px 40px rgba(0,0,0,0.4);
-}
-
-.box h2{
-  margin-bottom:15px;
-  color:#ffd700;
-}
-
-input{
+/* خلفية متحركة */
+.bg{
+  position:fixed;
+  top:0;left:0;
   width:100%;
-  padding:12px;
-  border-radius:12px;
-  border:none;
-  outline:none;
-  margin-bottom:15px;
-  text-align:center;
-  font-size:16px;
+  height:100%;
+  pointer-events:none;
+  z-index:0;
 }
 
-button{
-  background:#ffd700;
-  color:#000;
-  border:none;
-  padding:10px 25px;
-  border-radius:20px;
-  font-size:16px;
-  cursor:pointer;
-}
-
-button:hover{
-  background:#ffea80;
-}
-
-/* صفحة الهدية */
-#gift{
-  display:none;
-  text-align:center;
-  padding:15px;
-}
-
-#gift h1{
-  color:#ffd700;
-  margin-bottom:10px;
-}
-
-#gift img{
-  width:100%;
-  border-radius:20px;
-  margin-top:15px;
-}
-
-/* الفوانيس */
+/* فوانيس نازلة */
 .lantern{
   position:absolute;
-  top:-50px;
+  top:-100px;
   font-size:30px;
   animation: fall linear infinite;
   opacity:0.8;
@@ -94,54 +41,104 @@ button:hover{
 
 @keyframes fall{
   to{
-    transform:translateY(110vh);
+    transform:translateY(120vh);
   }
+}
+
+/* المحتوى */
+.container{
+  position:relative;
+  z-index:2;
+  padding:30px 15px 60px;
+  max-width:900px;
+  margin:auto;
+}
+
+.card{
+  background:rgba(255,255,255,0.1);
+  border-radius:20px;
+  padding:25px;
+  text-align:center;
+  margin-bottom:30px;
+  backdrop-filter: blur(10px);
+}
+
+h1{
+  color:#ffd369;
+  margin-bottom:10px;
+}
+
+p{
+  opacity:0.9;
+}
+
+/* الصور */
+.gallery{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+  gap:15px;
+  margin-top:20px;
+}
+
+.gallery img{
+  width:100%;
+  border-radius:15px;
+  object-fit:cover;
+  box-shadow:0 10px 20px rgba(0,0,0,0.4);
+}
+
+/* تشغيل الصوت */
+audio{
+  display:none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- موسيقى -->
-<audio id="music" src="ramadan.mp3" loop></audio>
+<!-- أصوات -->
+<audio autoplay loop>
+  <source src="ramadan.mp3" type="audio/mpeg">
+</audio>
 
-<!-- الدخول -->
-<div class="box" id="login">
-  <h2>🎁 اضغط وافتح الهدية</h2>
-  <input type="password" id="pass" placeholder="اكتب الباسورد">
-  <button onclick="openGift()">افتح</button>
-</div>
+<!-- فوانيس -->
+<div class="bg" id="bg"></div>
 
-<!-- الهدية -->
-<div class="box" id="gift">
-  <h1>🌙 أهلاً رمضان 🌙</h1>
-  <p>كل سنة وانت طيب<br>رمضان كريم عليك وعلى أحبابك ❤️</p>
-  <img src="ramadan.jpg" alt="رمضان">
+<div class="container">
+
+  <div class="card">
+    <h1>🌙 أهلاً رمضان 🌙</h1>
+    <p>كل سنة وانت طيب  
+    <br> رمضان كريم عليك وعلى أحبابك ✨</p>
+  </div>
+
+  <div class="card">
+    <h2>أجواء رمضان 🤍</h2>
+    <div class="gallery">
+      <img src="ramadan.jpg">
+      <img src="ramadan1.jpg">
+      <img src="ramadan2.jpg">
+      <img src="ramadan3.jpg">
+      <img src="ramadan.jpg">
+      <img src="ramadan1.jpg">
+      <img src="ramadan2.jpg">
+      <img src="ramadan3.jpg">
+    </div>
+  </div>
+
 </div>
 
 <script>
-function openGift(){
-  const pass = document.getElementById("pass").value;
-  if(pass === "اهلا رمضان"){
-    document.getElementById("login").style.display="none";
-    document.getElementById("gift").style.display="block";
-    document.getElementById("music").play();
-    startLanterns();
-  }else{
-    alert("الباسورد غلط 😅");
-  }
-}
+const bg = document.getElementById("bg");
+const icons = ["🏮","🌙","✨","⭐"];
 
-function startLanterns(){
-  const icons = ["🏮","🌙","✨"];
-  for(let i=0;i<30;i++){
-    let lantern = document.createElement("div");
-    lantern.className="lantern";
-    lantern.innerHTML = icons[Math.floor(Math.random()*icons.length)];
-    lantern.style.left = Math.random()*100 + "vw";
-    lantern.style.animationDuration = (5 + Math.random()*5) + "s";
-    document.body.appendChild(lantern);
-  }
+for(let i=0;i<30;i++){
+  let el = document.createElement("div");
+  el.className="lantern";
+  el.innerText = icons[Math.floor(Math.random()*icons.length)];
+  el.style.left = Math.random()*100+"%";
+  el.style.animationDuration = (5+Math.random()*5)+"s";
+  bg.appendChild(el);
 }
 </script>
 
