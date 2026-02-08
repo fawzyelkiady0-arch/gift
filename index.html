@@ -10,135 +10,138 @@
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family: "Cairo", sans-serif;
+  font-family: 'Tahoma', sans-serif;
 }
 
 body{
-  min-height:100vh;
-  background: linear-gradient(180deg,#0f2027,#203a43,#2c5364);
-  overflow-x:hidden;
-  color:#fff;
+  background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
+  color:white;
+  overflow:hidden;
 }
 
-/* خلفية متحركة */
-.bg{
+/* شاشة الباسورد */
+#lock{
   position:fixed;
-  top:0;left:0;
+  inset:0;
+  background:linear-gradient(135deg,#0f2027,#203a43);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+}
+
+.lock-box{
+  background:rgba(255,255,255,0.12);
+  padding:30px;
+  border-radius:20px;
+  text-align:center;
+  width:90%;
+  max-width:320px;
+  backdrop-filter:blur(10px);
+}
+
+.lock-box h2{
+  margin-bottom:15px;
+  color:#ffd369;
+}
+
+.lock-box input{
   width:100%;
-  height:100%;
-  pointer-events:none;
-  z-index:0;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  margin-bottom:10px;
+  text-align:center;
 }
 
-/* فوانيس نازلة */
-.lantern{
-  position:absolute;
-  top:-100px;
-  font-size:30px;
-  animation: fall linear infinite;
-  opacity:0.8;
-}
-
-@keyframes fall{
-  to{
-    transform:translateY(120vh);
-  }
+.lock-box button{
+  width:100%;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:#ffd369;
+  font-weight:bold;
 }
 
 /* المحتوى */
-.container{
-  position:relative;
-  z-index:2;
-  padding:30px 15px 60px;
-  max-width:900px;
-  margin:auto;
+#content{
+  display:none;
+  padding:15px;
 }
 
-.card{
-  background:rgba(255,255,255,0.1);
+.header{
+  background:rgba(0,0,0,0.4);
+  padding:20px;
   border-radius:20px;
-  padding:25px;
   text-align:center;
-  margin-bottom:30px;
-  backdrop-filter: blur(10px);
+  margin-bottom:15px;
 }
 
-h1{
+.header h1{
   color:#ffd369;
-  margin-bottom:10px;
 }
 
-p{
-  opacity:0.9;
-}
-
-/* الصور */
-.gallery{
+.images{
   display:grid;
-  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-  gap:15px;
-  margin-top:20px;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
 }
 
-.gallery img{
+.images img{
   width:100%;
   border-radius:15px;
-  object-fit:cover;
-  box-shadow:0 10px 20px rgba(0,0,0,0.4);
-}
-
-/* تشغيل الصوت */
-audio{
-  display:none;
 }
 </style>
 </head>
 
 <body>
 
-<!-- أصوات -->
-<audio autoplay loop>
-  <source src="ramadan.mp3" type="audio/mpeg">
-</audio>
+<!-- شاشة القفل -->
+<div id="lock">
+  <div class="lock-box">
+    <h2>🎁 افتح الهدية</h2>
+    <input id="pass" placeholder="اكتب الباسورد">
+    <button onclick="openGift()">افتح</button>
+  </div>
+</div>
 
-<!-- فوانيس -->
-<div class="bg" id="bg"></div>
+<!-- الصوت -->
+<audio id="song" src="ramadan.mp3" loop></audio>
 
-<div class="container">
+<!-- المحتوى -->
+<div id="content">
 
-  <div class="card">
+  <div class="header">
     <h1>🌙 أهلاً رمضان 🌙</h1>
-    <p>كل سنة وانت طيب  
-    <br> رمضان كريم عليك وعلى أحبابك ✨</p>
+    <p>كل سنة وانت طيب 🤍</p>
   </div>
 
-  <div class="card">
-    <h2>أجواء رمضان 🤍</h2>
-    <div class="gallery">
-      <img src="ramadan.jpg">
-      <img src="ramadan1.jpg">
-      <img src="ramadan2.jpg">
-      <img src="ramadan3.jpg">
-      <img src="ramadan.jpg">
-      <img src="ramadan1.jpg">
-      <img src="ramadan2.jpg">
-      <img src="ramadan3.jpg">
-    </div>
+  <div class="images">
+    <img src="ramadan.jpg">
+    <img src="ramadan1.jpg">
+    <img src="ramadan2.jpg">
+    <img src="ramadan3.jpg">
+    <img src="ramadan.jpg">
+    <img src="ramadan1.jpg">
+    <img src="ramadan2.jpg">
+    <img src="ramadan3.jpg">
   </div>
 
 </div>
 
 <script>
-const bg = document.getElementById("bg");
-const icons = ["🏮","🌙","✨","⭐"];
+function openGift(){
+  const password = "اهلا رمضان";
+  const input = document.getElementById("pass").value;
 
-for(let i=0;i<30;i++){
-  let el = document.createElement("div");
-  el.className="lantern";
-  el.innerText = icons[Math.floor(Math.random()*icons.length)];
-  el.style.left = Math.random()*100+"%";
-  el.style.animationDuration = (5+Math.random()*5)+"s";
-  bg.appendChild(el);
+  if(input === password){
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("content").style.display = "block";
+    document.body.style.overflowY = "auto";
+    document.getElementById("song").play();
+  }else{
+    alert("❌ الباسورد غلط");
+  }
 }
 </script>
 
