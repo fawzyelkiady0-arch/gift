@@ -1,80 +1,149 @@
 <!DOCTYPE html>
 <html lang="ar">
 <head>
-  <meta charset="UTF-8">
-  <title>مفاجأة 🎁</title>
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #ff7aa2, #ffb6c1);
-      font-family: Arial, sans-serif;
-      color: #fff;
-      text-align: center;
-    }
-    .box {
-      background: rgba(255,255,255,0.15);
-      padding: 20px;
-      border-radius: 15px;
-      width: 90%;
-      max-width: 350px;
-    }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: none;
-      font-size: 16px;
-    }
-    button {
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #fff;
-      color: #ff5f8f;
-      font-size: 16px;
-      cursor: pointer;
-    }
-    #gift {
-      display: none;
-      margin-top: 15px;
-    }
-    img {
-      width: 100%;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🎁 مفاجأة رمضان</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family: 'Cairo', sans-serif;
+}
+
+body{
+  height:100vh;
+  background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* صندوق الدخول */
+.box{
+  background:rgba(255,255,255,0.08);
+  backdrop-filter: blur(15px);
+  padding:25px;
+  border-radius:20px;
+  width:90%;
+  max-width:350px;
+  text-align:center;
+  box-shadow:0 20px 40px rgba(0,0,0,0.4);
+}
+
+.box h2{
+  margin-bottom:15px;
+  color:#ffd700;
+}
+
+input{
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:none;
+  outline:none;
+  margin-bottom:15px;
+  text-align:center;
+  font-size:16px;
+}
+
+button{
+  background:#ffd700;
+  color:#000;
+  border:none;
+  padding:10px 25px;
+  border-radius:20px;
+  font-size:16px;
+  cursor:pointer;
+}
+
+button:hover{
+  background:#ffea80;
+}
+
+/* صفحة الهدية */
+#gift{
+  display:none;
+  text-align:center;
+  padding:15px;
+}
+
+#gift h1{
+  color:#ffd700;
+  margin-bottom:10px;
+}
+
+#gift img{
+  width:100%;
+  border-radius:20px;
+  margin-top:15px;
+}
+
+/* الفوانيس */
+.lantern{
+  position:absolute;
+  top:-50px;
+  font-size:30px;
+  animation: fall linear infinite;
+  opacity:0.8;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(110vh);
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <div class="box">
-    <h2>اضغط وافتح الهدية 🎁</h2>
-    <input type="password" id="pass" placeholder="اكتب الباسورد">
-    <button onclick="openGift()">افتح</button>
+<!-- موسيقى -->
+<audio id="music" src="ramadan.mp3" loop></audio>
 
-    <div id="gift">
-      <h3>❤️ مفاجأة ❤️</h3>
-      <p>كل سنة وانت طيب 🌙 رمضان كريم</p>
-      <img src="https://picsum.photos/300">
-    </div>
-  </div>
+<!-- الدخول -->
+<div class="box" id="login">
+  <h2>🎁 اضغط وافتح الهدية</h2>
+  <input type="password" id="pass" placeholder="اكتب الباسورد">
+  <button onclick="openGift()">افتح</button>
+</div>
 
-  <script>
-    function openGift() {
-      const password = "1234"; // ← غير الباسورد من هنا
-      const input = document.getElementById("pass").value;
-      if (input === password) {
-        document.getElementById("gift").style.display = "block";
-      } else {
-        alert("الباسورد غلط ❌");
-      }
-    }
-  </script>
+<!-- الهدية -->
+<div class="box" id="gift">
+  <h1>🌙 أهلاً رمضان 🌙</h1>
+  <p>كل سنة وانت طيب<br>رمضان كريم عليك وعلى أحبابك ❤️</p>
+  <img src="ramadan.jpg" alt="رمضان">
+</div>
+
+<script>
+function openGift(){
+  const pass = document.getElementById("pass").value;
+  if(pass === "اهلا رمضان"){
+    document.getElementById("login").style.display="none";
+    document.getElementById("gift").style.display="block";
+    document.getElementById("music").play();
+    startLanterns();
+  }else{
+    alert("الباسورد غلط 😅");
+  }
+}
+
+function startLanterns(){
+  const icons = ["🏮","🌙","✨"];
+  for(let i=0;i<30;i++){
+    let lantern = document.createElement("div");
+    lantern.className="lantern";
+    lantern.innerHTML = icons[Math.floor(Math.random()*icons.length)];
+    lantern.style.left = Math.random()*100 + "vw";
+    lantern.style.animationDuration = (5 + Math.random()*5) + "s";
+    document.body.appendChild(lantern);
+  }
+}
+</script>
 
 </body>
 </html>
