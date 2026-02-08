@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>مفاجأة 🎁</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff7aa2, #ffb6c1);
+      font-family: Arial, sans-serif;
+      color: #fff;
+      text-align: center;
+    }
+    .box {
+      background: rgba(255,255,255,0.15);
+      padding: 20px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 350px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #fff;
+      color: #ff5f8f;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #gift {
+      display: none;
+      margin-top: 15px;
+    }
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>اضغط وافتح الهدية 🎁</h2>
+    <input type="password" id="pass" placeholder="اكتب الباسورد">
+    <button onclick="openGift()">افتح</button>
+
+    <div id="gift">
+      <h3>❤️ مفاجأة ❤️</h3>
+      <p>كل سنة وانت طيب 🌙 رمضان كريم</p>
+      <img src="https://picsum.photos/300">
+    </div>
+  </div>
+
+  <script>
+    function openGift() {
+      const password = "1234"; // ← غير الباسورد من هنا
+      const input = document.getElementById("pass").value;
+      if (input === password) {
+        document.getElementById("gift").style.display = "block";
+      } else {
+        alert("الباسورد غلط ❌");
+      }
+    }
+  </script>
+
+</body>
+</html>
