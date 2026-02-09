@@ -6,10 +6,7 @@
 <title>مناسبتك عندنا</title>
 
 <style>
-*{
-  box-sizing:border-box;
-  font-family:'Cairo',sans-serif;
-}
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
 body{
   margin:0;
   background:linear-gradient(180deg,#2b0a3d,#4b1b6b);
@@ -18,17 +15,15 @@ body{
   overflow-x:hidden;
 }
 
-/* قلوب مطر */
+/* قلوب */
 .heart{
   position:fixed;
   top:-10%;
   font-size:18px;
-  opacity:.5;
+  opacity:.4;
   animation:fall linear infinite;
 }
-@keyframes fall{
-  to{transform:translateY(120vh)}
-}
+@keyframes fall{to{transform:translateY(120vh)}}
 
 /* شاشة الباسورد */
 #lock{
@@ -47,44 +42,28 @@ body{
   width:90%;
   max-width:360px;
 }
-.lock-box h2{
-  margin-bottom:10px;
-}
-.lock-box p{
-  margin-bottom:15px;
-  opacity:.9;
-}
-.lock-box .sm{
-  font-size:28px;
-  letter-spacing:8px;
-  margin-bottom:10px;
-}
+.lock-box h2{margin-bottom:10px}
+.lock-box .sm{font-size:28px;letter-spacing:8px;margin:10px 0}
 .lock-box input{
   width:100%;
   padding:14px;
   border-radius:14px;
   border:none;
   text-align:center;
-  font-size:16px;
 }
 .lock-box button{
   margin-top:15px;
-  padding:14px;
   width:100%;
+  padding:14px;
   border:none;
   border-radius:14px;
   background:#9b59b6;
-  color:white;
+  color:#fff;
   font-size:18px;
 }
 
 /* المحتوى */
-.container{
-  max-width:520px;
-  margin:auto;
-  padding:20px;
-  display:none;
-}
+.container{max-width:520px;margin:auto;padding:20px;display:none}
 
 /* الجوابات */
 .letters{
@@ -95,9 +74,26 @@ body{
 .letter{
   flex:1;
   background:rgba(255,255,255,0.12);
+  border-radius:20px;
   padding:15px;
-  border-radius:18px;
   cursor:pointer;
+  position:relative;
+}
+.num{
+  position:absolute;
+  top:-10px;
+  right:-10px;
+  background:#9b59b6;
+  width:30px;
+  height:30px;
+  border-radius:50%;
+  line-height:30px;
+}
+.answer{
+  display:none;
+  margin-top:10px;
+  font-size:14px;
+  opacity:.9;
 }
 
 /* الصور */
@@ -107,16 +103,10 @@ body{
   padding:15px;
   margin-bottom:20px;
 }
-img{
-  width:100%;
-  border-radius:20px;
-}
-.caption{
-  margin-top:10px;
-  font-size:16px;
-}
+img{width:100%;border-radius:20px}
+.caption{margin-top:10px}
 
-/* زر الهدية */
+/* زر */
 .main{
   background:#9b59b6;
   border:none;
@@ -127,7 +117,7 @@ img{
   font-size:18px;
 }
 
-/* صندوق الهدية */
+/* الهدية */
 #giftBox{
   position:fixed;
   inset:0;
@@ -144,25 +134,15 @@ img{
   width:90%;
   max-width:420px;
 }
-.gift video{
-  width:100%;
-  border-radius:20px;
-  margin-bottom:15px;
-}
+video{width:100%;border-radius:20px;margin-bottom:15px}
 .type{
   direction:rtl;
   text-align:right;
-  min-height:120px;
+  min-height:140px;
   line-height:2;
 }
-.btns{
-  display:flex;
-  gap:10px;
-  margin-top:15px;
-}
-.btns button{
-  flex:1;
-}
+.btns{display:flex;gap:10px;margin-top:15px}
+.btns button{flex:1}
 </style>
 </head>
 
@@ -175,50 +155,59 @@ img{
 <span class="heart" style="left:70%;animation-duration:10s">💜</span>
 <span class="heart" style="left:90%;animation-duration:13s">💜</span>
 
-<!-- شاشة الدخول -->
+<!-- دخول -->
 <div id="lock">
   <div class="lock-box">
     <h2>حكاية اتكتبت بالقلب وكملت بالروح 💜</h2>
-    <div class="sm">S&nbsp;&nbsp;M</div>
+    <div class="sm">S&nbsp;M</div>
     <input type="password" id="pass" placeholder="اكتبي الباسورد يا عسل 💕">
     <button onclick="unlock()">ادخلي يقلبي 💖</button>
   </div>
 </div>
 
 <audio id="song" loop>
-  <source src="fawaz.mp3" type="audio/mpeg">
+  <source src="fawaz.mp3">
 </audio>
 
 <div class="container" id="content">
 
-  <p>الجوابات دي من نصيبك 💌</p>
+<p>الجوابات دي من نصيبك 💌</p>
 
-  <div class="letters">
-    <div class="letter" onclick="alert('وجودك في حياتي نعمة بحمد ربنا عليها كل يوم 💖')">💌</div>
-    <div class="letter" onclick="alert('إنتي الأمان اللي قلبي كان بيدور عليه 💞')">💌</div>
-    <div class="letter" onclick="alert('معاكي أيامي بقت أحلى وأهدى ✨')">💌</div>
+<div class="letters">
+  <div class="letter" onclick="toggle(this)">
+    <div class="num">1</div>💌
+    <div class="answer">وجودك في حياتي فرق كل حاجة 💖</div>
   </div>
-
-  <div class="card">
-    <img src="fawaz1.jpg">
-    <div class="caption">إنتي البداية اللي اختارها قلبي 💜</div>
+  <div class="letter" onclick="toggle(this)">
+    <div class="num">2</div>💌
+    <div class="answer">إنتي الأمان اللي قلبي محتاجه 💞</div>
   </div>
-
-  <div class="card">
-    <img src="fawaz2.jpg">
-    <div class="caption">ومعاكي الدنيا بقت أحن 💖</div>
+  <div class="letter" onclick="toggle(this)">
+    <div class="num">3</div>💌
+    <div class="answer">معاكي أيامي أحلى بكتير ✨</div>
   </div>
+</div>
 
-  <div class="card">
-    <img src="fawaz3.jpg">
-    <div class="caption">وأجمل حكاية هي اللي لسه مكملة ❤️</div>
-  </div>
+<div class="card">
+  <img src="fawaz1.jpg">
+  <div class="caption">إنتي البداية اللي اختارها قلبي 💜</div>
+</div>
 
-  <button class="main" onclick="openGift()">🎁 افتح الهدية</button>
+<div class="card">
+  <img src="fawaz2.jpg">
+  <div class="caption">ومعاكي الدنيا بقت أهدى 💖</div>
+</div>
+
+<div class="card">
+  <img src="fawaz3.jpg">
+  <div class="caption">وأجمل حكاية هي اللي لسه مكملة ❤️</div>
+</div>
+
+<button class="main" onclick="openGift()">🎁 افتح الهدية</button>
 
 </div>
 
-<!-- صندوق الهدية -->
+<!-- الهدية -->
 <div id="giftBox">
   <div class="gift">
     <video id="giftVideo" src="fawaz-gift.mp4"></video>
@@ -231,52 +220,52 @@ img{
 </div>
 
 <script>
-const text = `
-وجودك هو سر السعادة في أيامي 💖✨
+const text = `وجودك هو سر السعادة في أيامي 💖✨
 ومعاك الدنيا بتضحك والقلب يطمن 💞😊
 وحبك نعمة بشكر ربنا عليها كل يوم 💝🙏
 
-🤍 بحبك S 🤍
-`;
+🤍 بحبك S 🤍`;
 
 function unlock(){
-  if(document.getElementById("pass").value.toLowerCase()==="s m"){
-    document.getElementById("lock").style.display="none";
-    document.getElementById("content").style.display="block";
-    document.getElementById("song").play();
-  }else alert("الباسورد غلط");
+  if(pass.value.toLowerCase()==="s m"){
+    lock.style.display="none";
+    content.style.display="block";
+    song.play();
+  } else alert("الباسورد غلط");
+}
+
+function toggle(el){
+  const a=el.querySelector(".answer");
+  a.style.display = a.style.display==="block"?"none":"block";
 }
 
 function openGift(){
-  document.getElementById("giftBox").style.display="flex";
-  document.getElementById("song").pause();
-  const v=document.getElementById("giftVideo");
-  v.currentTime=0;
-  v.play();
+  giftBox.style.display="flex";
+  song.pause();
+  giftVideo.currentTime=0;
+  giftVideo.play();
   type();
 }
 
 function closeGift(){
-  document.getElementById("giftBox").style.display="none";
-  const v=document.getElementById("giftVideo");
-  v.pause();
-  document.getElementById("song").play();
+  giftBox.style.display="none";
+  giftVideo.pause();
+  song.play();
 }
 
 function type(){
-  const el=document.getElementById("typeText");
-  el.innerHTML="";
+  typeText.innerHTML="";
   let i=0;
   const t=setInterval(()=>{
-    el.innerHTML+=text[i];
+    typeText.innerHTML+=text[i];
     i++;
     if(i>=text.length) clearInterval(t);
   },40);
 }
 
 function replay(){
-  document.getElementById("giftVideo").currentTime=0;
-  document.getElementById("giftVideo").play();
+  giftVideo.currentTime=0;
+  giftVideo.play();
   type();
 }
 </script>
